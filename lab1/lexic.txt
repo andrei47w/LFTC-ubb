@@ -8,7 +8,7 @@ a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
 Lexic:
  a.Special symbols, representing:
 - operators + - * / = < <= == >= 
-- separators [ ] { } : ; space newline
+- separators [ ] { } : ; space newline "
 - reserved words:
  char else if int program read while write string
  
