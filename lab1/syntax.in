@@ -1,0 +1,15 @@
+<program> = <stmt>
+<varDecl> ::= <type> <term> <stmtSeparator>
+<type> ::= int | string | char
+<stmt> ::= <simpleStmt> | <simpleStmt> <stmt>
+<stmtSeparator> ::= ; | newline
+<simplStmt> ::= <varDecl> <stmtSeparator> | <iostmt> <stmtSeparator> | <assignStmt> <stmtSeparator> | <whileStmt> <stmtSeparator> | <ifStmt> <stmtSeparator>
+<assignStmt> ::= IDENTIFIER = <expression>
+<expression> ::= <expression> <operator> <term> | <expression> <operator> <expression>
+<operator> ::= / | * | - | +
+<term> ::= <IDENTIFIER>
+<iostmt> ::= read (<string>) | write (<string>)
+<ifStmt> ::= if <condition> <stmt> | if <condition> <stmt> else <stmt> 
+<whileStmt> ::= while <condition> <stmt>
+<condition> ::= <expression> <relation> <expression>
+<relation> ::= < | <= | == | != | >= | >
