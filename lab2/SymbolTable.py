@@ -33,26 +33,26 @@ class SymbolTable:
             else:
                 break
 
-        return hashPos * self.__capacity + listPos
+        return hashPos, listPos
 
-operators = SymbolTable(10)
+    def findByPair(self, hashPos, listPos):
+        if self.__capacity <= hashPos or len(self.__items[hashPos]) <= listPos:
+            return 0
 
-print(operators.add("-"))
-print(operators.add("+"))
-print(operators.add("=="))
-
-print(operators.getPos("-"))
-print(operators.getPos("+"))
-print(operators.getPos("=="))
+        return self.__items[hashPos][listPos]
 
 
-print()
-separators = SymbolTable(10)
 
-print(separators.add(";"))
-print(separators.add("\n"))
-print(separators.add("{"))
+table_capacity = 25
+identifiers = SymbolTable(table_capacity)
+int_constants = SymbolTable(table_capacity)
+str_constants = SymbolTable(table_capacity)
 
-print(separators.getPos(";"))
-print(separators.getPos("\n"))
-print(separators.getPos("{"))
+# print(identifiers.add("-"))
+# print(identifiers.add("+"))
+# print(identifiers.add("=="))
+# print(identifiers.findByPair(1, 2))
+#
+# print(identifiers.getPos("-"))
+# print(identifiers.getPos("+"))
+# print(identifiers.getPos("=="))
