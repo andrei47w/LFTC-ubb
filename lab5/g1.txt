@@ -4,4 +4,3 @@ S = S
 P =
 S -> aA | bB | E
 A -> aA | cB
-B -> c | S
