@@ -1,6 +1,7 @@
-program varDecl type stmt stmtSeparator simplStmt assignStmt expression operator term iostmt ifStmt whileStmt condition relation term 
-IDENTIFIER "(" ")" "[" "]" "{" "}" ";" ":" " "  "." "," "+" "-" "*" "/" "%" "=" "<" ">" "<=" ">=" "==" "!" "!=" ">>" "<<" "&&" "list" "else" "for" "#" "if" "int" "||" "read" "write" "string" "while"
-program 
+N = program varDecl type stmt stmtSeparator simplStmt assignStmt expression operator term iostmt ifStmt whileStmt condition relation term 
+E = IDENTIFIER "(" ")" "[" "]" "{" "}" ";" ":" " "  "." "," "+" "-" "*" "/" "%" "=" "<" ">" "<=" ">=" "==" "!" "!=" ">>" "<<" "&&" "list" "else" "for" "#" "if" "int" "||" "read" "write" "string" "while"
+S = program 
+P =
 program -> stmt
 varDecl -> type term stmtSeparator
 type -> int | string
