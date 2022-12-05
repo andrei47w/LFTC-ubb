@@ -1,0 +1,18 @@
+program varDecl type stmt stmtSeparator simplStmt assignStmt expression operator term iostmt ifStmt whileStmt condition relation term 
+IDENTIFIER "(" ")" "[" "]" "{" "}" ";" ":" " "  "." "," "+" "-" "*" "/" "%" "=" "<" ">" "<=" ">=" "==" "!" "!=" ">>" "<<" "&&" "list" "else" "for" "#" "if" "int" "||" "read" "write" "string" "while"
+program 
+program -> stmt
+varDecl -> type term stmtSeparator
+type -> int | string
+stmt -> simpleStmt | simpleStmt stmt
+stmtSeparator -> ";" | "{" | "}" 
+simplStmt -> varDecl stmtSeparator | iostmt stmtSeparator | assignStmt stmtSeparator | whileStmt stmtSeparator | ifStmt stmtSeparator
+assignStmt -> IDENTIFIER "=" expression
+expression -> expression operator term | expression operator expression
+operator -> "/" | "*" | "-" | "+"
+term -> IDENTIFIER 
+iostmt -> read ">>" IDENTIFIER | write "<<" IDENTIFIER
+ifStmt -> "if" "(" condition ")" stmt | "if" "(" condition ")" stmt "else" stmt
+whileStmt -> "while "(" condition ")" stmt
+condition -> expression relation expression
+relation -> "<" | "<=" | "==" | "!=" | ">=" | ">"
