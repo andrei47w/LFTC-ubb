@@ -52,11 +52,18 @@ class Grammar:
             self.setS(S)
 
     def checkCFG(self):
+        for prod in self.P:
+            values = prod[1].split()
+            for value in values:
+                if value in self.N or value in self.E:
+                    continue
+                else:
+                    return False
         return True
 
 
 grammar = Grammar()
-grammar.readFile("g2.txt")
+grammar.readFile("g1.txt")
 
 print(str(grammar))
 print(grammar.checkCFG())
