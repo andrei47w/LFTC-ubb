@@ -1,0 +1,14 @@
+<state>
+<op>
+<transFunc> = <state>,<op>,<state> // helper
+
+<transFuncList> = <transFunc> | <transFunc>;<transFuncList>
+<finalList> = <state> | <state>,<finalList>
+<stateList> = <state> | <state>,<stateList>
+<alph> = <op> | <op>,<alph>
+<q0> = <state>
+
+
+FA reads from a file the info in the following order line by line: Q, E, S, q0, F.
+S has its own class which lets you get, add elements and get the resulting state of a state and an operation.
+Function testFA, given an operations list, returns False if the operations are invalid or not a DFA. Otherwise it returns the final state.
