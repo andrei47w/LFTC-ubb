@@ -1,4 +1,3 @@
-
 class Grammar:
     def __init__(self, N: list = [], E: list = [], P: list = [], S: str = "") -> None:
         self.N = N  # Non-terminals
@@ -48,6 +47,13 @@ class Grammar:
             self.setP(P)
             self.setE(E)
             self.setS(S)
+
+    def getProductionsForNonTerminal(self, non_terminal):
+        productions = []
+        for prod in self.P:
+            if prod[0] == non_terminal:
+                productions.append(prod)
+        return productions
 
     def checkCFG(self):
         for prod in self.P:
