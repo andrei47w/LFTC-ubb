@@ -1,5 +1,3 @@
-from FA import *
-
 
 class Grammar:
     def __init__(self, N: list = [], E: list = [], P: list = [], S: str = "") -> None:
@@ -60,10 +58,3 @@ class Grammar:
                 else:
                     return False
         return True
-
-
-grammar = Grammar()
-grammar.readFile("g1.txt")
-
-print(str(grammar))
-print(grammar.checkCFG())
