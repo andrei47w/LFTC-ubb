@@ -53,6 +53,30 @@ class ParserConfig:
         terminal = self.beta.pop()
         self.alpha.append(terminal)
 
+    def another_try(self):
+        symbl = self.alpha.pop()
+        non_terminal, production_nbr = symbl.split("#")
+        production_nbr = int(production_nbr)
+        productions = self.grammar.get_productions_for_non_terminal(
+            non_terminal)
+
+        current_production = productions[production_nbr]
+        for el in current_production:
+            el = self.beta.pop()
+
+        if production_nbr < len(productions) - 1:
+            new_production = productions[production_nbr + 1]
+            if new_production != "epsilon":
+                self.beta += reversed(new_production)
+            self.beta.append(non_terminal + "#{0}".format(production_nbr + 1))
+            self.s = 'q'
+            return
+
+        if self.i == 0 and non_terminal == self.grammar.S:
+            self.s = 'e'
+            return
+        self.beta.append(non_terminal)
+
 
 class ParserTests:
     def testAdvance(self, parser):
