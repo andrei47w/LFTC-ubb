@@ -11,7 +11,8 @@ print(grammar.checkCFG())
 
 print('\n\n\n')
 parser = ParserConfig(grammar)
-parser.parse(('S'))
+parser.parse(('a','b','a'))
+print(parser.alpha)
 
 # parser.momentary_insuccess()
 # parser.success()

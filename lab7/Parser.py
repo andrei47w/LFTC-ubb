@@ -13,7 +13,7 @@ class ParserConfig:
         self.s = s
         self.i = i
         self.alpha = alpha
-        self.beta = [s]
+        self.beta = [grammar.S]
 
     def __str__(self) -> str:
         return "Grammar: \n" + str(self.get_grammar()) + "\n\n" + \
@@ -42,7 +42,7 @@ class ParserConfig:
         rules = production[0][1].split()[0]
         if rules != "epsilon":
             self.beta += reversed(rules)
-        self.alpha.append(rules + "#0")
+        self.alpha.append(production[0][0] + "#0")
 
     def advance(self):
         self.i += 1
@@ -56,13 +56,14 @@ class ParserConfig:
         productions = self.grammar.getProductionsForNonTerminal(
             non_terminal)
 
-        current_production = productions[production_nbr][1].split()[0]
-        for el in current_production:
-            el = self.beta.pop()
+        current_production = productions[production_nbr][1].split()
+        for production in current_production:
+            if production != "epsilon":
+                _ = self.beta.pop()
 
         if production_nbr < len(productions) - 1:
-            new_production = productions[production_nbr + 1]
-            if new_production != "epsilon":
+            new_production = productions[production_nbr + 1][1].split()
+            if "epsilon" not in new_production:
                 self.beta += reversed(new_production)
             self.alpha.append(non_terminal + "#{0}".format(production_nbr + 1))
             self.s = 'q'
