@@ -1,0 +1,6 @@
+N = S A B
+E = a b c x
+S = S
+P =
+S -> aA | bB | E
+A -> aA | cB
