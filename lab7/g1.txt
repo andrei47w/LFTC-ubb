@@ -1,6 +1,7 @@
 N = S A B
-E = a b c x
+E = a b epsilon
 S = S
 P =
-S -> aA | bB | E
-A -> aA | cB
+S -> epsilon | a B | b A
+A -> a | a B
+B -> b | b A
