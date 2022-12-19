@@ -73,6 +73,33 @@ class ParserConfig:
             return
         self.beta.append(non_terminal)
 
+    def parse(self, word: tuple) -> list:
+        while self.s not in {'f', 'e'}:
+            if self.s == 'q':
+                if self.i == len(word) and len(self.beta) == 0:
+                    self.success()
+                else:
+                    if len(self.beta) > 0 and self.beta[-1] in self.grammar.N:
+                        self.expand()
+                    else:
+                        if self.i < len(word) and len(self.beta) > 0 and \
+                                self.beta[-1] == word[self.i]:
+                            self.advance()
+                        else:
+                            self.momentary_insuccess()
+            else:
+                if self.s == 'b':
+                    if len(self.alpha) > 0 and self.alpha[-1] in self.grammar.E:
+                        self.back()
+                    elif len(self.alpha) > 0:
+                        self.another_try()
+
+        if self.s == 'e':
+            print('error')
+            return None
+        print('sequence accepted')
+        return self.alpha
+
 
 class ParserTests:
     def testAdvance(self, parser):
