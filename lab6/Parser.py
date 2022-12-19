@@ -57,7 +57,7 @@ class ParserConfig:
         symbl = self.alpha.pop()
         non_terminal, production_nbr = symbl.split("#")
         production_nbr = int(production_nbr)
-        productions = self.grammar.get_productions_for_non_terminal(
+        productions = self.grammar.getProductionsForNonTerminal(
             non_terminal)
 
         current_production = productions[production_nbr]
