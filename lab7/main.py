@@ -11,14 +11,15 @@ print(grammar.checkCFG())
 
 print('\n\n\n')
 parser = ParserConfig(grammar)
+parser.parse(('S'))
 
-parser.momentary_insuccess()
-parser.success()
+# parser.momentary_insuccess()
+# parser.success()
 
-print(parser.back())
-print(str(parser))
+# print(parser.back())
+# print(str(parser))
 
-parser = ParserConfig(grammar)
-parserTest = ParserTests()
-parserTest.testAdvance(parser)
-parserTest.testExpand(parser)
+# testParset = ParserConfig(Grammar())
+# parserTest = ParserTests()
+# parserTest.testAdvance(testParset)
+# parserTest.testExpand(testParset)
