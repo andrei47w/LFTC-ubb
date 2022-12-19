@@ -8,12 +8,12 @@ from Grammar import *
 
 
 class ParserConfig:
-    def __init__(self, grammar: Grammar, s='q', i=0, alpha=[], beta=[]):
+    def __init__(self, grammar: Grammar, s='q', i=0, alpha=[]):
         self.grammar = grammar
         self.s = s
         self.i = i
         self.alpha = alpha
-        self.beta = beta
+        self.beta = [s]
 
     def __str__(self) -> str:
         return "Grammar: \n" + str(self.get_grammar()) + "\n\n" + \
@@ -32,13 +32,9 @@ class ParserConfig:
         self.s = 'f'  # final state
 
     def back(self):
-        if len(self.beta):
-            self.i -= 1
-            terminal = self.beta.pop()
-            self.alpha.append(terminal)
-
-            return True
-        return False
+        self.i -= 1
+        terminal = self.alpha.pop()
+        self.beta.append(terminal)
 
     def expand(self):
         current = self.beta.pop()
@@ -46,7 +42,7 @@ class ParserConfig:
         rules = production[0][1].split()[0]
         if rules != "epsilon":
             self.beta += reversed(rules)
-        self.beta.append(rules + "#0")
+        self.alpha.append(rules + "#0")
 
     def advance(self):
         self.i += 1
@@ -57,10 +53,10 @@ class ParserConfig:
         symbl = self.alpha.pop()
         non_terminal, production_nbr = symbl.split("#")
         production_nbr = int(production_nbr)
-        productions = self.grammar.get_productions_for_non_terminal(
+        productions = self.grammar.getProductionsForNonTerminal(
             non_terminal)
 
-        current_production = productions[production_nbr]
+        current_production = productions[production_nbr][1].split()[0]
         for el in current_production:
             el = self.beta.pop()
 
@@ -68,7 +64,7 @@ class ParserConfig:
             new_production = productions[production_nbr + 1]
             if new_production != "epsilon":
                 self.beta += reversed(new_production)
-            self.beta.append(non_terminal + "#{0}".format(production_nbr + 1))
+            self.alpha.append(non_terminal + "#{0}".format(production_nbr + 1))
             self.s = 'q'
             return
 
