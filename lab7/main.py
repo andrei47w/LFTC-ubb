@@ -8,19 +8,20 @@ grammar.readFile("g1.txt")
 print(str(grammar))
 print(grammar.checkCFG())
 
-
 print('\n\n\n')
 parser = ParserConfig(grammar)
-parser.parse(('a','a','c','b','c'))
-print(parser.alpha)
+with open('seq.txt') as file:
+    for line in file:
+        seq = line.split()
+file.close()
+parser.parse(seq)
+prod = parser.alpha
+print(prod)
+tree = parser.get_tree(prod)
+print(tree)
+file = open('g1.out', 'w')
+for item in tree:
+    file.write(str(item) + "\n")
+file.close()
 
-# parser.momentary_insuccess()
-# parser.success()
 
-# print(parser.back())
-# print(str(parser))
-
-# testParset = ParserConfig(Grammar())
-# parserTest = ParserTests()
-# parserTest.testAdvance(testParset)
-# parserTest.testExpand(testParset)

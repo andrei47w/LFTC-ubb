@@ -1,6 +1,7 @@
 from FA import *
 from Grammar import *
 
+
 # q = normal state
 # b = back state
 # f = final state
@@ -17,10 +18,10 @@ class ParserConfig:
 
     def __str__(self) -> str:
         return "Grammar: \n" + str(self.get_grammar()) + "\n\n" + \
-            "S = " + self.s + "\n" + \
-            "I = " + str(self.i) + "\n" + \
-            "Alpha = " + str(self.alpha) + "\n" + \
-            "Beta = " + str(self.beta) + "\n"
+               "S = " + self.s + "\n" + \
+               "I = " + str(self.i) + "\n" + \
+               "Alpha = " + str(self.alpha) + "\n" + \
+               "Beta = " + str(self.beta) + "\n"
 
     def get_grammar(self) -> Grammar:
         return self.grammar
@@ -74,7 +75,7 @@ class ParserConfig:
             return
         self.beta.append(non_terminal)
 
-    def parse(self, word: tuple) -> list:
+    def parse(self, word: list) -> list:
         while self.s not in ['f', 'e']:
             if self.s == 'q':
                 if self.i == len(word) and len(self.beta) == 0:
@@ -100,6 +101,41 @@ class ParserConfig:
             return None
         print('sequence accepted')
         return self.alpha
+
+    def get_tree(self, production_string):
+        if not production_string:
+            return []
+        result = [(production_string[0].split('#')[0], -1, -1)]
+        i = 0
+        j = 0
+        while j < len(production_string) and i < len(result):
+            top = result[i]
+            if top[0] not in self.grammar.N:
+                i += 1
+                continue
+            expand_with = None
+            while j < len(production_string):
+                if '#' not in production_string[j]:
+                    j += 1
+                    continue
+                non_terminal, production_number = production_string[j].split('#')
+                if non_terminal == top[0]:
+                    expand_with = (non_terminal, production_number)
+                    j += 1
+                    break
+                j += 1
+            if j == len(production_string):
+                break
+            non_terminal, production_number = expand_with
+            production_number = int(production_number)
+            production = self.grammar.getProductionsForNonTerminal(non_terminal)[production_number][1].split()
+            added = 1
+            for symbol in production:
+                result.insert(i + added, (symbol, i, i + 1 + added))
+                added += 1
+            result[i + added - 1] = (*result[i + added - 1][:-1], -1)
+            i += 1
+        return result
 
 
 class ParserTests:
