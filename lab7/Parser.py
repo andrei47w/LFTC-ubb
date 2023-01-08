@@ -39,7 +39,7 @@ class ParserConfig:
     def expand(self):
         current = self.beta.pop()
         production = self.grammar.getProductionsForNonTerminal(current)
-        rules = production[0][1].split()[0]
+        rules = production[0][1].split()
         if rules != "epsilon":
             self.beta += reversed(rules)
         self.alpha.append(production[0][0] + "#0")
@@ -75,7 +75,7 @@ class ParserConfig:
         self.beta.append(non_terminal)
 
     def parse(self, word: tuple) -> list:
-        while self.s not in {'f', 'e'}:
+        while self.s not in ['f', 'e']:
             if self.s == 'q':
                 if self.i == len(word) and len(self.beta) == 0:
                     self.success()
