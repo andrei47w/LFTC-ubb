@@ -1,0 +1,24 @@
+Github: https://github.com/andrei47w/LFTC-ubb/tree/master/lab7
+Documentation:
+Class Grammar:
+N = set of non-terminals
+E = set of terminals
+P = set of productions
+S = starting point
+Fun readFile(filename) -> parses the file and reads the above properties, having the ability to store multiple productions for a non-terminal
+checkCfg() -> checks if we have a value in a production that is not part of the set of terminals or non-terminals
+Class ParserConfig:
+Grammar = the grammar used for parsing
+S = contains the current state of the parser
+I = counter for the current position in the sequence
+Alpha = working stack stores the way the parse is built
+Beta = input stack , part of the tree to be built
+Expand() -> For a nonterminal head of input stack it expands it according to the rule
+Advance() -> For a terminal head of input stack that equals the currently symbol from input, i is incremented and alpha stack advances with the top of beta stack
+Momentary_insuccess() -> For a terminal head of input stack that is diferent from the current symbol from input, parser state is set to back state (‘b’)
+Back() ->  For a terminal head of working stack, i is decremented and alpha stack advances
+Another_try() ->  For a nonterminal head of working stack, either the program goes into error state (‘e’) or normal state (‘q’)
+Success() ->  Sets the final state (‘f’) corresponding to success w ∊ L(G)
+Parse() -> parses the sequence, prints sequence accepted if we reach state ‘f’, if we reach ‘e’ it prints error
+Get_tree() -> forms the tree according to the input stack
+
